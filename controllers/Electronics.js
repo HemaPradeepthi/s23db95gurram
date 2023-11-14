@@ -31,3 +31,16 @@ exports.Electronics_list = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+// VIEWS
+// Handle a show all view
+exports.Electronics_view_all_Page = async function (req, res) {
+    try {
+        theElectronics = await electronic.find();
+        res.render('Electronics', { title: 'Electronics Search Results', results: theElectronics });
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
