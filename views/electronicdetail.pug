@@ -7,16 +7,17 @@ block content
   - let price = toShow.Price
   - let storage = toShow.Storage
 
+  div(style='font-family: Arial;')
   div
     div.row
-      div(class='electronicsAttr mr-3') Electronics ID is:
-      div #{electronicsid}
+      div(class='electronicsAttr mr-3', style='font-weight: bold') Electronics ID is:
+      div(style='color: blue;') #{electronicsid}
     div.row
-      div(class='electronicsAttr mr-3') Electronics Gadget is:
-      div #{gadget}
+      div(class='electronicsAttr mr-3',style='font-weight: bold') Electronics Gadget is:
+      div(style='color: green;') #{gadget}
     div.row
-      div(class='electronicsAttr mr-3') Electronics Price is:
-      div #{price}
+      div(class='electronicsAttr mr-3',style='font-weight: bold') Electronics Price is:
+      div(style='color: red;') #{price}
     div.row
-      div(class='electronicsAttr mr-3') Electronics Storage is:
-      div #{storage}
+      div(class='electronicsAttr mr-3',style='font-weight: bold') Electronics Storage is:
+      div(style='color: #555;') #{storage}

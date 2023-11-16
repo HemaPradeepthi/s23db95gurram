@@ -12,35 +12,14 @@ block content
     div #{electronicsid}
   
   - let actionid = "/resource/electronics/" + electronicsid
-  form(id='electronicsForm', action= actionid, method="PUT")
+  form(id='electronicsForm', action= actionid, method="PUT", style='max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;')
     div.form-group
-      label.electronicsAttr(for='Gadget') Gadget
-      input#Gadget(type='text', name='Gadget', value= Gadget )
+      label.electronicsAttr(for='Gadget', style='display: block; font-weight: bold; margin-bottom: 5px;') Gadget
+      input#Gadget(type='text', name='Gadget', value= Gadget, style='width: calc(100% - 12px); padding: 10px; border: 1px solid #ccc; border-radius: 4px;')
     div.form-group
-      label.electronicsAttr(for='Price') electronics Price
-      input#Price(type='text', name='Price', value= Price )
+      label.electronicsAttr(for='Price', style='display: block; font-weight: bold; margin-bottom: 5px;') electronics Price
+      input#Price(type='text', name='Price', value= Price, style='width: calc(100% - 12px); padding: 10px; border: 1px solid #ccc; border-radius: 4px;')
     div.form-group
-      label.electronicsAttr(for='Storage') electronics Storage
-      input#Storage(type='number', name='Storage', value= Storage )
-      input(type="submit")
-
-  script.
-    document.forms['electronicsForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      })
-      .then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      })
-      .then((body) => {
-        alert("Update succeeded")
-        // TODO handle body
-      })
-      .catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error )
-      });
-    });
+      label.electronicsAttr(for='Storage', style='display: block; font-weight: bold; margin-bottom: 5px;') electronics Storage 
+      input#Storage(type='number', name='Storage', value= Storage, style='width: calc(100% - 12px); padding: 10px; border: 1px solid #ccc; border-radius: 4px;')
+      input(type="submit", style='padding: 10px 15px; border: none; border-radius: 4px; background-color: #007bff; color: white; cursor: pointer; transition: background-color 0.3s;')
