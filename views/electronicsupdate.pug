@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1= title
+  - let electronicsid = toShow._id
+  - let Gadget = toShow.Gadget
+  - let Price = toShow.Price
+  - let Storage = toShow.Storage
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{electronicsid}
+  
+  - let actionid = "/resource/electronics/" + electronicsid
+  form(id='electronicsForm', action= actionid, method="PUT")
+    div.form-group
+      label.electronicsAttr(for='Gadget') Gadget
+      input#Gadget(type='text', name='Gadget', value= Gadget )
+    div.form-group
+      label.electronicsAttr(for='Price') electronics Price
+      input#Price(type='text', name='Price', value= Price )
+    div.form-group
+      label.electronicsAttr(for='Storage') electronics Storage
+      input#Storage(type='number', name='Storage', value= Storage )
+      input(type="submit")
+
+  script.
+    document.forms['electronicsForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      })
+      .then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      })
+      .then((body) => {
+        alert("Update succeeded")
+        // TODO handle body
+      })
+      .catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
