@@ -19,4 +19,4 @@ router.get('/create', Electronics_controlers.Electronics_create_Page);
 /* GET create update page */
 router.get('/update', Electronics_controlers.Electronics_update_Page);
 /* GET delete costume page */
-router.get('/delete', Electronics_controlers.Electronics_delete_Page);
+router.get('/delete', Electronics_controlers.electronics_delete_Page);
