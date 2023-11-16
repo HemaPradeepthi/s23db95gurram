@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  - let electronicsid = toShow._id
+  - let gadget = toShow.Gadget
+  - let price = toShow.Price
+  - let storage = toShow.Storage
+
+  div
+    div.row
+      div(class='electronicsAttr mr-3') Electronics ID is:
+      div #{electronicsid}
+    div.row
+      div(class='electronicsAttr mr-3') Electronics Gadget is:
+      div #{gadget}
+    div.row
+      div(class='electronicsAttr mr-3') Electronics Price is:
+      div #{price}
+    div.row
+      div(class='electronicsAttr mr-3') Electronics Storage is:
+      div #{storage}

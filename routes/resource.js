@@ -18,5 +18,4 @@ router.get('/electronics/:id', Electronics_controller.Electronics_detail);
 // GET request for list of all Costume items.
 router.get('/electronics', Electronics_controller.Electronics_list);
 //GET detail costume page //
-router.get('/detail', Electronics_controller.Electronics_view_one_Page);
 module.exports = router;

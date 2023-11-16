@@ -98,15 +98,41 @@ failed`);
     }
 };
 // Handle Electronics delete on DELETE.
-exports.Electronics_delete = async function(req, res) {
+exports.Electronics_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await electronic.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
+        result = await electronic.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
     } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+};
+// Handle a show one view with id specified by query
+exports.Electronics_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await electronic.findById(req.query.id)
+        res.render('electronicdetail',
+            { title: 'electronic Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.Electronics_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('electronicscreate', { title: 'electronics Create'});
+    }
+    catch(err){
     res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
+    res.send(`{'error': '${err}'}`);
     }
     };
     
