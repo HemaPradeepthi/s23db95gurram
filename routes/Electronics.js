@@ -9,5 +9,6 @@ var router = express.Router();
 
 /* GET costumes */
 router.get('/', Electronics_controlers.Electronics_view_all_Page );
-
+//GET detail costume page //
+router.get('/detail', Electronics_controlers.Electronics_view_one_Page);
 module.exports = router;

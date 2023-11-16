@@ -1,26 +1,26 @@
 var electronic = require('../models/Electronics');
-// List of all Costumes
+// List of all Electronicss
 exports.Electronics_list = function (req, res) {
     res.send('NOT IMPLEMENTED: Electronics list');
 };
-// for a specific Costume.
+// for a specific Electronics.
 exports.Electronics_detail = function (req, res) {
     res.send('NOT IMPLEMENTED: Electronics detail: ' + req.params.id);
 };
-// Handle Costume create on POST.
+// Handle Electronics create on POST.
 exports.Electronics_create_post = function (req, res) {
     res.send('NOT IMPLEMENTED: Electronics create POST');
 };
-// Handle Costume delete form on DELETE.
-exports.Electronics_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: Electronics delete DELETE ' + req.params.id);
-};
-// Handle Costume update form on PUT.
+// Handle Electronics delete form on DELETE.
+// exports.Electronics_delete = function (req, res) {
+//     res.send('NOT IMPLEMENTED: Electronics delete DELETE ' + req.params.id);
+// };
+// Handle Electronics update form on PUT.
 exports.Electronics_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: Electronics update PUT' + req.params.id);
 };
 
-// List of all Costumes
+// List of all Electronicss
 exports.Electronics_list = async function (req, res) {
     try {
         theElectronics = await electronic.find();
@@ -45,14 +45,14 @@ exports.Electronics_view_all_Page = async function (req, res) {
     }
 };
 
-// Handle Costume create on POST.
+// Handle Electronics create on POST.
 exports.Electronics_create_post = async function (req, res) {
     console.log(req.body)
     let document = new electronic();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"Electronics_type":"goat", "cost":12, "size":"large"}
     document.Gadget = req.body.Gadget;
     document.Price = req.body.Price;
     document.Storage = req.body.Storage;
@@ -66,7 +66,7 @@ exports.Electronics_create_post = async function (req, res) {
     }
 };
 
-// for a specific Costume.
+// for a specific Electronics.
 exports.Electronics_detail = async function (req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -78,7 +78,7 @@ exports.Electronics_detail = async function (req, res) {
     }
 };
 
-// Handle Costume update form on PUT.
+// Handle Electronics update form on PUT.
 exports.Electronics_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
@@ -97,3 +97,16 @@ ${JSON.stringify(req.body)}`)
 failed`);
     }
 };
+// Handle Electronics delete on DELETE.
+exports.Electronics_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await electronic.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
