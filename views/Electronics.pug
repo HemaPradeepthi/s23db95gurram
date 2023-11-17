@@ -1,19 +1,17 @@
 extends layout
-
 block content
-  h1= title
-  - let item = results
-  .container-fluid 
-      .row
-        each electr, index in item
-            .col-sm-2(onclick=`buy(${index})`)
-              p Gadget: #{electr.Gadget}
-              p Price : #{electr.Price}
-              p Storage: #{electr.Storage}
-  script.
-    function buy(index) {
-      alert(`you purchased item ${index}`);
-    }
-          
-
-  
+ h1= title
+ - let items = results;
+   each item in items
+    - let destination = `dispatch("/electronics/update?id=${item._id}")`
+      div
+       p Gadget - #{item.Gadget}
+       p Price  - #{item.Price}
+       p Storage - #{item.Storage}
+       button.btn( class="btn-primary ml-1", onclick= destination) Update
+       br
+       br
+ script.
+  function dispatch(path){
+   window.location.href=path
+  }

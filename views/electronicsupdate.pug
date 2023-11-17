@@ -23,3 +23,13 @@ block content
       label.electronicsAttr(for='Storage', style='display: block; font-weight: bold; margin-bottom: 5px;') electronics Storage 
       input#Storage(type='number', name='Storage', value= Storage, style='width: calc(100% - 12px); padding: 10px; border: 1px solid #ccc; border-radius: 4px;')
       input(type="submit", style='padding: 10px 15px; border: none; border-radius: 4px; background-color: #007bff; color: white; cursor: pointer; transition: background-color 0.3s;')
+  div(class="container-fluid")
+div(class="row m-1")
+    each item in items
+        - let destination = `dispatch(\"/electronics/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.Gadget}(#{item.Price}) is #{item.Storage}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
+script.
+    function dispatch(path){
+        window.location.href=path
+    }
