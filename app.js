@@ -19,6 +19,24 @@ var chooseRouter = require('./routes/choose');
 var electronic = require("./models/Electronics");
 var resourceRouter = require('./routes/resource');
 
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    Account.findOne({ username: username })
+      .then(function (user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (!user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      })
+      .catch(function (err) {
+        return done(err)
+      })
+  })
+)
 
 var app = express();
 
@@ -34,9 +52,9 @@ app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
-  }));
-  app.use(passport.initialize());
-  app.use(passport.session());
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -48,11 +66,10 @@ app.use('/resource', resourceRouter);
 // passport config
 // Use the existing connection
 // The Account model
-var Account =require('./models/account');
+var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
-
 
 
 // catch 404 and forward to error handler
@@ -78,24 +95,7 @@ db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
 db.once("open", function () {
   console.log("Connection to DB succeeded")
 });
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-  Account.findOne({ username: username })
-  .then(function (user){
-  if (err) { return done(err); }
-  if (!user) {
-  return done(null, false, { message: 'Incorrect username.' });
-  }
-  if (!user.validPassword(password)) {
-  return done(null, false, { message: 'Incorrect password.' });
-  }
-  return done(null, user);
-  })
-  .catch(function(err){
-  return done(err)
-  })
-  })
-  ) 
+
 
 // We can seed the collection if needed on server start
 async function recreateDB() {
