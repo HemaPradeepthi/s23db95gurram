@@ -12,10 +12,10 @@ router.get('/', Electronics_controlers.Electronics_view_all_Page );
 /* GET detail Electronics page */
 
 /* GET detail Electronics page */
-router.get('/detail', Electronics_controlers.Electronics_view_one_Page);
+router.get('/detail', secured,Electronics_controlers.Electronics_view_one_Page);
 module.exports = router;
 /* GET create Electronics page */
-router.get('/create', Electronics_controlers.Electronics_create_Page);
+router.get('/create', secured,Electronics_controlers.Electronics_create_Page);
 // A little function to check if we have an authorized user and continue on
 // redirect to login.
 const secured = (req, res, next) => {
@@ -28,4 +28,4 @@ res.redirect("/login");
 router.get('/update', secured,
 Electronics_controlers.Electronics_update_Page);
 /* GET delete Electronics page */
-router.get('/delete', Electronics_controlers.electronics_delete_Page);
+router.get('/delete',secured, Electronics_controlers.electronics_delete_Page);
